@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><title th:text="'Imprimir ticket ' + ${t.numero()}">Imprimir</title>
+<style>@page{size:80mm auto;margin:0}body{font-family:"Courier New",monospace;width:76mm;margin:0 auto;padding:3mm;text-align:center;font-size:13px}
+img.f{width:100%;filter:grayscale(1) contrast(1.4)}h1{font-size:24px;margin:6px 0}.p{font-size:30px;font-weight:700;margin:4px 0}.s{font-size:11px;margin:8px 0}</style></head>
+<body onload="setTimeout(function(){print()},600)">
+<b style="font-size:22px" th:text="${app.empresa()}">GIMV Park</b><br>Estacionamentos<br><br>
+<img class="f" th:if="${t.fotoUrl() != null}" th:src="${t.fotoUrl()}" alt=""><br>
+<p><b th:text="${app.unidade()}"></b><br><span th:text="${app.telefone()}"></span><br>CNPJ: <span th:text="${app.cnpj()}"></span><br><span th:text="${app.horario()}"></span></p>
+<h1>Ticket: <span th:text="${t.numero()}"></span></h1>
+<img th:src="@{/qr(t=${t.token()})}" width="150" height="150" alt="QR Code">
+<p>Entrada: <span th:text="${t.entradaBr()}"></span></p><div>Placa:</div><div class="p" th:text="${t.placaFmt()}"></div>
+<p style="text-align:left">Tabela: <span th:text="${t.tabela()}"></span></p><p class="s" th:text="${app.aviso()}"></p>
+<p class="s">Nenhum objeto de valor declarado pelo cliente dentro do veículo.</p>
+<p class="s">Gerado pelo sistema <span th:text="${app.empresa()}"></span><br>Impr. <span th:text="${agora}"></span></p>
+</body></html>

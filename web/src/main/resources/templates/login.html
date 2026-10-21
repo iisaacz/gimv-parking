@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title th:text="'Entrar - ' + ${app.empresa()}">Entrar</title><link rel="stylesheet" th:href="@{/style.css}"></head>
+<body class="login">
+<form method="post" th:action="@{/login}" class="card login-box">
+  <div class="login-logo"><img th:src="@{/logo.png}" alt="GIMV Parking"></div>
+  <p class="muted" style="text-align:center;margin:0">Controle e Gestão de Estacionamento</p>
+  <p class="erro" th:if="${erro}" th:text="${erro}"></p>
+  <input name="u" placeholder="Usuário" required autofocus>
+  <input name="s" type="password" placeholder="Senha" required>
+  <button class="btn">Entrar</button>
+</form>
+</body></html>

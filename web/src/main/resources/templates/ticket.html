@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title th:text="'Ticket ' + ${t.numero()} + ' - ' + ${app.empresa()}">Ticket</title><link rel="stylesheet" th:href="@{/style.css}"></head>
+<body style="background:#fff">
+<div class="tk">
+ <div class="hd"><img class="logo-tk" th:src="@{/logo.png}" alt="GIMV Parking"></div>
+ <div class="sec"><h2 th:text="${app.unidade()}">UNIDADE</h2>
+  <div class="l">Endereço:</div><div class="v" style="font-size:18px" th:text="${app.endereco()}"></div>
+  <div class="l">Telefone:</div><div class="v" th:text="${app.telefone()}"></div></div>
+ <div class="sec"><div class="g2">
+  <div style="text-align:center"><img th:src="@{/qr(t=${t.token()})}" width="150" height="150" alt="QR Code"></div>
+  <div><div class="box"><small>Nº Ticket</small><b th:text="${t.numero()}">1001</b></div><div class="box"><small>Placa</small><b th:text="${t.placa()}">ABC1D23</b></div></div></div>
+  <div class="g2">
+   <div><div class="l">Data Entrada</div><div class="v" th:text="${t.entradaBr()}"></div></div>
+   <div><div class="l">Data Saída</div><div class="v" th:text="${t.saidaBr()}"></div></div>
+   <div><div class="l">Tabela de Preço</div><div class="v" th:text="${t.tabela()}"></div></div>
+   <div><div class="l">Forma de Pagamento</div><div class="v" th:text="${t.formaPagamento() != null} ? ${t.formaPagamento()} : '—'"></div></div>
+   <div><div class="l">Valor Serviços</div><div class="v" th:text="${t.valorBr()}"></div></div>
+   <div><div class="l">Status</div><div><span class="pill" th:classappend="${t.pago()} ? 'ok' : 'on'" style="font-size:20px" th:text="${t.pago()} ? 'Pago' : 'No pátio'"></span></div></div>
+   <div><div class="l">Valor Cobrado</div><div class="v" th:text="${t.pago()} ? ${t.valorBr()} : '—'"></div></div>
+   <div><div class="l">Data Pagamento</div><div class="v" th:text="${t.pago()} ? ${t.saidaBr()} : '—'"></div></div>
+  </div>
+  <th:block th:if="${t.fotoUrl() != null}"><img class="foto" th:src="${t.fotoUrl()}" alt="Foto do veículo"><div style="text-align:center;margin-top:6px">Foto do veículo</div></th:block>
+  <p class="aviso" th:text="${app.aviso()}"></p>
+  <p class="aviso">Ticket virtual gerado pelo sistema <b  th:text="${app.empresa()}"></b></p>
+ </div></div>
+</body></html>
